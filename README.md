@@ -40,9 +40,9 @@ dependencies {
 
 ```java
 
-        private String USERNAME = "";
-        private String PASSWORD = "";
-        String API_KEY = "2013";
+        String USERNAME = "";
+        String PASSWORD = "";
+        String API_KEY = "20177";
         String Username = "";
         String Password = "";
 
