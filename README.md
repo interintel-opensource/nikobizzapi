@@ -1,6 +1,41 @@
 # Nikobizz Android Api
 
 
+### Quick Setup
+
+
+- Add the JitPack repository to your build file 
+Add it in your `build.gradle` at the end of repositories:
+```
+
+repositories {
+    // ...
+    maven { url "https://jitpack.io" }
+}
+
+```
+        
+- Add nikobizzapi dependency
+```
+
+dependencies {
+        //...
+    compile 'com.github.interintel-opensource:nikobizzapi:v1.0.0'
+}
+```
+- Add OkHTTP dependency (is a requirement for passing a callback to the service call)
+```
+
+dependencies {
+        //...
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+}
+
+ 
+
+```
+
+
 ### Usage
 
 ```java
