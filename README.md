@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
         //...
-    compile 'com.github.interintel-opensource:nikobizzapi:v1.0.0'
+    compile 'com.github.interintel-opensource:nikobizzapi:v1.0.1'
 }
 ```
 - Add OkHTTP dependency (is a requirement for passing a callback to the service call)
