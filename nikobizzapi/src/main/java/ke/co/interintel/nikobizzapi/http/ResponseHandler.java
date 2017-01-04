@@ -95,7 +95,7 @@ public class ResponseHandler implements Callback {
 
     }
 
-    public static void get(String service, Callback callback) {
+    public void get(String service, Callback callback) {
 
         HttpUrl httpUrl = HttpUrl.parse(Constants.URL);
 
@@ -165,7 +165,7 @@ public class ResponseHandler implements Callback {
 
     }
 
-    protected String getResponseMessage(JSONObject responseJson) {
+    public static String getResponseMessage(JSONObject responseJson) {
         StringBuilder sb = new StringBuilder();
         try {
             JSONObject response = responseJson.getJSONObject("response");

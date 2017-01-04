@@ -5,13 +5,10 @@ import org.json.JSONObject;
 
 import java.util.Hashtable;
 
-import ke.co.interintel.nikobizzapi.http.ConsumeServiceHandler;
 import ke.co.interintel.nikobizzapi.http.GetHostHandler;
-import ke.co.interintel.nikobizzapi.http.ResponseHandler;
 import okhttp3.Callback;
 import okhttp3.MediaType;
 
-import static ke.co.interintel.nikobizzapi.http.ResponseHandler.get;
 
 /**
  * Created by Brian on 1/2/2017.
@@ -80,12 +77,10 @@ public class Nikobizz {
 
     private void serviceRequest(JSONObject payload, String nextService, Callback callback) {
 
+        //ResponseHandler responseHandler = new ConsumeServiceHandler(callback);
 
-        ResponseHandler responseHandler;
-        responseHandler = new ConsumeServiceHandler();
-
-        GetHostHandler getHostHandler = new GetHostHandler(nextService, this.API_KEY, responseHandler, payload);
-        get(Constants.SERVICE_GET_HOST, getHostHandler);
+        GetHostHandler getHostHandler = new GetHostHandler(nextService, this.API_KEY, callback, payload);
+        getHostHandler.get(Constants.SERVICE_GET_HOST, getHostHandler);
     }
 
     private JSONObject initPayload() {

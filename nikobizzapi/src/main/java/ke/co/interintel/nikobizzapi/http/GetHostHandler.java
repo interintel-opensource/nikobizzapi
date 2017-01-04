@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import ke.co.interintel.nikobizzapi.models.LocationIP;
+import okhttp3.Callback;
 
 
 /**
@@ -14,13 +15,13 @@ public class GetHostHandler extends ResponseHandler {
 
     private String service;
 
-    private ResponseHandler responseHandler;
+    private Callback responseHandler;
     private JSONObject parameters;
     private String apiKey;
 
     private String TAG = GetHostHandler.class.getSimpleName();
 
-    public GetHostHandler(String nextService, String apiKey, ResponseHandler responseHandler,
+    public GetHostHandler(String nextService, String apiKey, Callback responseHandler,
                           JSONObject parameters) {
         //super(activity);
         this.service = nextService;
