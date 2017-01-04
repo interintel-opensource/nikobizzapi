@@ -22,11 +22,11 @@ public class ApiSecurity {
 
     public static String TAG = ApiSecurity.class.getSimpleName();
 
-    public static String hmacSHA256(String secret, String message) {
+    public static String hmacSHA256(byte[] secret, String message) {
         String hash = null;
         try {
             Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
+            SecretKeySpec secret_key = new SecretKeySpec(secret, "HmacSHA256");
             sha256_HMAC.init(secret_key);
 
             hash = new String(Base64.encode(sha256_HMAC.doFinal(message.getBytes()), Base64.DEFAULT));
@@ -38,13 +38,13 @@ public class ApiSecurity {
         return hash;
     }
 
-    public static JSONObject packagePayload(String secret, JSONObject params) throws JSONException{
+    public static JSONObject packagePayload(String secret, JSONObject params) throws JSONException {
         JSONObject paramsJsonObj = new JSONObject();
 
         List<String> keys = new ArrayList<>();
         JSONArray jArray = params.names();
 
-        for (int i=0;i<jArray.length();i++){
+        for (int i = 0; i < jArray.length(); i++) {
             keys.add(jArray.getString(i));
         }
 
@@ -52,7 +52,7 @@ public class ApiSecurity {
 
         List<String> paramsArray = new ArrayList<>();
         for (String key : keys) {
-            if(key.equals("sec_hash") || key.equals("credentials"))continue;
+            if (key.equals("sec_hash") || key.equals("credentials")) continue;
             Object json = params.get(key);
             if (!(json instanceof JSONObject) && !(json instanceof JSONArray)) {
 
@@ -64,7 +64,10 @@ public class ApiSecurity {
 
         String payload = TextUtils.join("&", paramsArray);
         try {
-            paramsJsonObj.put("sec_hash", hmacSHA256(secret, payload));
+
+            byte[] secretKey = Base64.decode(secret, Base64.DEFAULT);
+            //Log.i("SECRET KEY",new String(secretKey));
+            paramsJsonObj.put("sec_hash", hmacSHA256(secretKey, payload));
 
             Iterator<String> iter = params.keys();
             while (iter.hasNext()) {
